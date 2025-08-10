@@ -1,0 +1,30 @@
+plugins {
+    id 'war'
+    id 'org.gretty' version '4.0.3'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Servlet API
+    implementation 'javax.servlet:javax.servlet-api:4.0.1'
+
+    // AspectJ
+    implementation 'org.aspectj:aspectjrt:1.9.19'
+    implementation 'org.aspectj:aspectjweaver:1.9.19'
+
+    // JSTL for JSP
+    implementation 'javax.servlet:jstl:1.2'
+}
+
+gretty {
+    contextPath = '/'
+    servletContainer = 'jetty11'
+    httpPort = 8080
+}
+
+compileJava {
+    options.compilerArgs += ['-Aorg.aspectj.weaver.Dump.condition=abort']
+}
